@@ -2,20 +2,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.UnknownHostException;
 
 
-
-public class uiClass implements Runnable{
+class uiClass implements Runnable{
 
     static boolean runServer=true;
     static String  statusServer;
-    static int  statusServerInt;
     static int port;
     static boolean connectionOk=false;
     static WebServer server;
-    static int programRun=1;
 
     public static void main(String[] args){
 
