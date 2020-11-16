@@ -22,8 +22,8 @@ public class WebServer implements Runnable
     static ServerSocket serverSocket;
     static int serverPort=0;
     public int conectionClient;
-    static final File WEB_ROOT= new File("TestSite");
-    static final String DEFAULT_FILE= "a.html";
+    static final File WEB_ROOT= new File("Health");
+    static final String DEFAULT_FILE= "index.html";
     static final String FILE_NOT_FOUND="404.html";
     static final String METHOD_NOT_SUPPORTED="not_supported.html";
     static final String FILE_MAINTENANCE="maintenance.html";
