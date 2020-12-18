@@ -5,6 +5,9 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -18,6 +21,37 @@ public class WebServerTest
     File fileN1= new File(root,"typefile.js..d");
 
     WebServer server;
+
+    @Test
+    public void testFound() throws IOException
+    {
+        File root= new  File("Health");
+        File fileHTML= new File(root,"maintenance.html");
+        int fileLength =(int)fileHTML.length();
+
+        PrintWriter out = null;
+        OutputStream dataOut = null;
+        String fileRequested = "maintenance.html";
+
+        server.fileNotFound(out, null,fileRequested);
+
+    }
+
+    @Test
+    void test_getStatus()
+    {
+        server.setStateServer(1);
+        assertEquals(1,server.getStateServer());
+
+    }
+
+    @Test
+    void test_getSocketClient() {
+        Socket sock = new Socket();
+        server.setClientSocket(sock);
+        assertEquals(sock,server.getClientSocket());
+    }
+
 
     @Before
     public void setup() {
@@ -70,28 +104,28 @@ public class WebServerTest
     }
 
     @Test
-    public void test_acceptServerPort()
+    public void test_acceptServerPort1()
     {
         server.setPort(10005);
         assertEquals(true,server.acceptServerPort());
     }
 
     @Test
-    public void test_Exception1_acceptServerPort()
+    public void test_acceptServerPort2()
     {
         server.setPort(100000);
         assertEquals(false,server.acceptServerPort());
     }
 
     @Test
-    public void test_Exception2_acceptServerPort()
+    public void test_acceptServerPort3()
     {
         server.setPort(-10);
         assertEquals(false,server.acceptServerPort());
     }
 
     @Test
-    public void test_Exception3_acceptServerPort()
+    public void test_acceptServerPort4()
     {
         server.setPort(1024);
         assertEquals(false,server.acceptServerPort());
@@ -99,7 +133,7 @@ public class WebServerTest
 
 
     @Test
-    public void test_Exception4_acceptServerPort()
+    public void test_acceptServerPort5()
     {
         server.setPort(65000);
         assertEquals(false,server.acceptServerPort());
@@ -108,17 +142,16 @@ public class WebServerTest
     @Test
     public void testListen()
     {
-        server.setPort(8444);
+        server.setPort(3600);
         server.acceptServerPort();
-        int myVar=server.conectionClient;
-        assertEquals(0,myVar);
+        int srv = server.conectionClient;
+        assertEquals(0,srv);
 
     }
     @Test
-    public void test() throws IOException {
-        WebServer server=new WebServer();
-
-        File root= new  File("www");
+    public void test() throws IOException
+    {
+        File root= new  File("Health");
         File fileHTML= new File(root,"not_supported.html");
         int fileLength =(int)fileHTML.length();
 
@@ -129,10 +162,9 @@ public class WebServerTest
     }
 
     @Test
-    public void testRead2() throws IOException  {
-        WebServer server =new WebServer();
-
-        File root= new  File("www");
+    public void testRead2() throws IOException
+    {
+        File root= new  File("Health");
         File fileHTML= new File(root,"not_supported.html");
         int fileLength =(int)fileHTML.length();
 

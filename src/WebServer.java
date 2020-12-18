@@ -253,7 +253,7 @@ public class WebServer implements Runnable
         return fileData;
     }
 
-    private void fileNotFound(PrintWriter out,OutputStream dataOut,String fileRequested) throws IOException
+    void fileNotFound(PrintWriter out, OutputStream dataOut, String fileRequested) throws IOException
     {
         writeFileData(FILE_NOT_FOUND,out,dataOut,"HTTP/1.1 404 Not found");
         System.out.println("-------NOT FOUND: "+fileRequested+" not found! -----------------------");
@@ -307,4 +307,6 @@ public class WebServer implements Runnable
         }
     }
 
+    public void listenForClients() {
+    }
 }
